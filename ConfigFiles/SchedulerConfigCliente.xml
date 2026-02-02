@@ -1,0 +1,444 @@
+<scheduler>
+	<task class='b2b.util.scheduler.SchedulerRefresh'
+		  name='Refresh'
+		  description='Realiza refresh de la configuracion del Scheduler'
+		  delay='10s' period='10s' version='1' enabled='true'>
+	</task>
+	<task class="b2b.util.scheduler.SchedulerBusyTask" name="DiskSpaceMonitor"
+		  description="DiskSpaceMonitor" period="2m" version="1" run-forced="true" delay="0s"
+		  enabled="true">
+		<task-param>
+			<param-name>task-class</param-name>
+			<param-value>com.megasoft.merchant.mms.tarea.simple.storageMonitor.DiskSpaceMonitor</param-value>
+		</task-param>
+	</task>
+	<task class='b2b.util.scheduler.SchedulerBusyTask'
+		  name='ControlMSTerminalCierreInsistente'
+		  description='Indica los cierre insistente de terminal y MODIFICA su Status Cierre a 0'
+		  period='5m' version='1' run-forced='true' enabled="true" delay='5m'>
+		<task-param>
+			<param-name>task-class</param-name>
+			<param-value>com.megasoft.merchant.mms.tarea.simple.controlms.ControlMSTerminalCierreInsistente</param-value>
+		</task-param>
+		<task-param>
+			<param-name>destinatariosreporte</param-name>
+			<param-value>(laloisi@megasoft.com.ve)</param-value>
+		</task-param>
+		<task-param>
+			<param-name>formatoreporte</param-name>
+			<param-value>pdf</param-value>
+		</task-param>
+		<task-param>
+			<param-name>numinsistencias</param-name>
+			<param-value>2</param-value>
+		</task-param>
+	</task>
+	<task class="b2b.util.scheduler.SchedulerBusyTask" name="EnvioBatchMMS"
+		  description="EnvioBatchMMS" period="2m" version="1" run-forced="true" delay="0s"
+		  enabled="true">
+		<task-param>
+			<param-name>task-class</param-name>
+			<param-value>com.megasoft.merchant.mms.tarea.simple.envio.EnvioBatchMMS</param-value>
+		</task-param>
+		<task-param>
+			<param-name>recuperarporperiodo</param-name>
+			<param-value>True</param-value>
+		</task-param>
+		<task-param>
+			<param-name>metodoenvio</param-name>
+			<param-value>Rabbit</param-value>
+		</task-param>
+	</task>
+	<task class="b2b.util.scheduler.SchedulerBusyTask" name="EnvioHistoryMMS"
+		  description="EnvioHistoryMMS" period="2m" version="1" run-forced="true" delay="0s"
+		  enabled="true">
+		<task-param>
+			<param-name>task-class</param-name>
+			<param-value>com.megasoft.merchant.mms.tarea.simple.envio.EnvioHistoryMMS</param-value>
+		</task-param>
+		<task-param>
+			<param-name>recuperarporperiodo</param-name>
+			<param-value>True</param-value>
+		</task-param>
+		<task-param>
+			<param-name>metodoenvio</param-name>
+			<param-value>Rabbit</param-value>
+		</task-param>
+	</task>
+	<task class="b2b.util.scheduler.SchedulerBusyTask" name="EnvioTransaclogMMS"
+		  description="EnvioTransaclogMMS" period="2m" version="1" run-forced="true" delay="0s"
+		  enabled="true">
+		<task-param>
+			<param-name>task-class</param-name>
+			<param-value>com.megasoft.merchant.mms.tarea.simple.envio.EnvioTransaclogMMS</param-value>
+		</task-param>
+		<task-param>
+			<param-name>recuperarporperiodo</param-name>
+			<param-value>True</param-value>
+		</task-param>
+		<task-param>
+			<param-name>metodoenvio</param-name>
+			<param-value>Rabbit</param-value>
+		</task-param>
+	</task>
+	<task class="b2b.util.scheduler.SchedulerBusyTask" name="EnvioRetailers"
+		  description="Envia todos los retailers en un tiempo" period="2m" version="1"
+		  run-forced="true" delay="0s" enabled="true">
+		<task-param>
+			<param-name>task-class</param-name>
+			<param-value>com.megasoft.merchant.mms.tarea.simple.envio.EnvioRetailers</param-value>
+		</task-param>
+		<task-param>
+			<param-name>metodoenvio</param-name>
+			<param-value>Rabbit</param-value>
+		</task-param>
+	</task>
+	<task class="b2b.util.scheduler.SchedulerBusyTask" name="EnvioMerchants"
+		  description="Envia todos los Merchants" period="2m" version="1" run-forced="true" delay="0s"
+		  enabled="true">
+		<task-param>
+			<param-name>task-class</param-name>
+			<param-value>com.megasoft.merchant.mms.tarea.simple.envio.EnvioMerchants</param-value>
+		</task-param>
+		<task-param>
+			<param-name>metodoenvio</param-name>
+			<param-value>Rabbit</param-value>
+		</task-param>
+	</task>
+	<task class="b2b.util.scheduler.SchedulerBusyTask" name="EnvioBanks"
+		  description="Envia todos los Banks" period="2m" version="1" run-forced="true" delay="0s"
+		  enabled="true">
+		<task-param>
+			<param-name>task-class</param-name>
+			<param-value>com.megasoft.merchant.mms.tarea.simple.envio.EnvioBanks</param-value>
+		</task-param>
+		<task-param>
+			<param-name>metodoenvio</param-name>
+			<param-value>Rabbit</param-value>
+		</task-param>
+	</task>
+	<task class="b2b.util.scheduler.SchedulerBusyTask" name="EnvioTransactions"
+		  description="Envia todos los Transactions" period="2m" version="1" run-forced="true"
+		  delay="0s" enabled="true">
+		<task-param>
+			<param-name>task-class</param-name>
+			<param-value>com.megasoft.merchant.mms.tarea.simple.envio.EnvioTransactions</param-value>
+		</task-param>
+		<task-param>
+			<param-name>metodoenvio</param-name>
+			<param-value>Rabbit</param-value>
+		</task-param>
+	</task>
+	<task class="b2b.util.scheduler.SchedulerBusyTask" name="EnvioVterminals"
+		  description="Envia todos los Vterminals" period="2m" version="1" run-forced="true"
+		  delay="0s" enabled="true">
+		<task-param>
+			<param-name>task-class</param-name>
+			<param-value>com.megasoft.merchant.mms.tarea.simple.envio.EnvioVterminals</param-value>
+		</task-param>
+		<task-param>
+			<param-name>metodoenvio</param-name>
+			<param-value>Rabbit</param-value>
+		</task-param>
+	</task>
+	<task class="b2b.util.scheduler.SchedulerBusyTask" name="EnvioGroups"
+		  description="Envia todos los Groups" period="2m" version="1" run-forced="true" delay="0s"
+		  enabled="true">
+		<task-param>
+			<param-name>task-class</param-name>
+			<param-value>com.megasoft.merchant.mms.tarea.simple.envio.EnvioGroups</param-value>
+		</task-param>
+		<task-param>
+			<param-name>metodoenvio</param-name>
+			<param-value>Rabbit</param-value>
+		</task-param>
+	</task>
+	<task class="b2b.util.scheduler.SchedulerBusyTask" name="EnvioMerchantPays"
+		  description="Envia todos los MerchantPays" period="2m" version="1" run-forced="true"
+		  delay="0s" enabled="true">
+		<task-param>
+			<param-name>task-class</param-name>
+			<param-value>com.megasoft.merchant.mms.tarea.simple.envio.EnvioMerchantPays</param-value>
+		</task-param>
+		<task-param>
+			<param-name>metodoenvio</param-name>
+			<param-value>Rabbit</param-value>
+		</task-param>
+	</task>
+	<task class="b2b.util.scheduler.SchedulerBusyTask" name="EnvioTerminals"
+		  description="Envia todos los Terminals" period="2m" version="1" run-forced="true" delay="0s"
+		  enabled="true">
+		<task-param>
+			<param-name>task-class</param-name>
+			<param-value>com.megasoft.merchant.mms.tarea.simple.envio.EnvioTerminals</param-value>
+		</task-param>
+		<task-param>
+			<param-name>metodoenvio</param-name>
+			<param-value>Rabbit</param-value>
+		</task-param>
+	</task>
+	<task class="b2b.util.scheduler.SchedulerBusyTask" name="EnvioVTerminalTerminals"
+		  description="Envia todos los VTerminalTerminals" period="2m" version="1" run-forced="true"
+		  delay="0s" enabled="true">
+		<task-param>
+			<param-name>task-class</param-name>
+			<param-value>com.megasoft.merchant.mms.tarea.simple.envio.EnvioVTerminalTerminals</param-value>
+		</task-param>
+		<task-param>
+			<param-name>metodoenvio</param-name>
+			<param-value>Rabbit</param-value>
+		</task-param>
+	</task>
+	<task class="b2b.util.scheduler.SchedulerBusyTask" name="EnvioPayments"
+		  description="Envia todos los Payments" period="2m" version="1" run-forced="true" delay="0s"
+		  enabled="true">
+		<task-param>
+			<param-name>task-class</param-name>
+			<param-value>com.megasoft.merchant.mms.tarea.simple.envio.EnvioPayments</param-value>
+		</task-param>
+		<task-param>
+			<param-name>metodoenvio</param-name>
+			<param-value>Rabbit</param-value>
+		</task-param>
+	</task>
+	<task class="b2b.util.scheduler.SchedulerBusyTask" name="EnvioAcquirers"
+		  description="Envia todos los Acquirers" period="2m" version="1" run-forced="true" delay="0s"
+		  enabled="true">
+		<task-param>
+			<param-name>task-class</param-name>
+			<param-value>com.megasoft.merchant.mms.tarea.simple.envio.EnvioAcquirers</param-value>
+		</task-param>
+		<task-param>
+			<param-name>metodoenvio</param-name>
+			<param-value>Rabbit</param-value>
+		</task-param>
+	</task>
+	<task class="b2b.util.scheduler.SchedulerBusyTask" name="EnvioCards"
+		  description="Envia todos los Cards" period="2m" version="1" run-forced="true" delay="0s"
+		  enabled="true">
+		<task-param>
+			<param-name>task-class</param-name>
+			<param-value>com.megasoft.merchant.mms.tarea.simple.envio.EnvioCards</param-value>
+		</task-param>
+		<task-param>
+			<param-name>metodoenvio</param-name>
+			<param-value>Rabbit</param-value>
+		</task-param>
+	</task>
+	<task class="b2b.util.scheduler.SchedulerBusyTask" name="EnvioAccounts"
+		  description="Envia todos los Accounts" period="2m" version="1" run-forced="true" delay="0s"
+		  enabled="true">
+		<task-param>
+			<param-name>task-class</param-name>
+			<param-value>com.megasoft.merchant.mms.tarea.simple.envio.EnvioAccounts</param-value>
+		</task-param>
+		<task-param>
+			<param-name>metodoenvio</param-name>
+			<param-value>Rabbit</param-value>
+		</task-param>
+	</task>
+	<task class="b2b.util.scheduler.SchedulerBusyTask" name="EnvioRespCode"
+		  description="Envia todos los RespCode" period="2m" version="1" run-forced="true" delay="0s"
+		  enabled="true">
+		<task-param>
+			<param-name>task-class</param-name>
+			<param-value>com.megasoft.merchant.mms.tarea.simple.envio.EnvioRespCode</param-value>
+		</task-param>
+		<task-param>
+			<param-name>metodoenvio</param-name>
+			<param-value>Rabbit</param-value>
+		</task-param>
+	</task>
+	<task class="b2b.util.scheduler.SchedulerBusyTask" name="EnvioMPaysCards"
+		  description="Envia todos los MPaysCards" period="2m" version="1" run-forced="true" delay="0s"
+		  enabled="true">
+		<task-param>
+			<param-name>task-class</param-name>
+			<param-value>com.megasoft.merchant.mms.tarea.simple.envio.EnvioMPaysCards</param-value>
+		</task-param>
+		<task-param>
+			<param-name>metodoenvio</param-name>
+			<param-value>Rabbit</param-value>
+		</task-param>
+	</task>
+	<task class="b2b.util.scheduler.SchedulerBusyTask" name="EnvioMedioPago"
+		  description="Envia todos los MedioPago" period="2m" version="1" run-forced="true" delay="0s"
+		  enabled="true">
+		<task-param>
+			<param-name>task-class</param-name>
+			<param-value>com.megasoft.merchant.mms.tarea.simple.envio.EnvioMedioPago</param-value>
+		</task-param>
+		<task-param>
+			<param-name>metodoenvio</param-name>
+			<param-value>Rabbit</param-value>
+		</task-param>
+	</task>
+	<task class="b2b.util.scheduler.SchedulerBusyTask" name="EnvioPaymentRespCodes"
+		  description="Envia todos los PaymentRespCodes" period="2m" version="1" run-forced="true"
+		  delay="0s" enabled="true">
+		<task-param>
+			<param-name>task-class</param-name>
+			<param-value>com.megasoft.merchant.mms.tarea.simple.envio.EnvioPaymentRespCodes</param-value>
+		</task-param>
+		<task-param>
+			<param-name>metodoenvio</param-name>
+			<param-value>Rabbit</param-value>
+		</task-param>
+	</task>
+	<task class="b2b.util.scheduler.SchedulerBusyTask" name="EnvioNodos"
+		  description="Envia todos los Nodos" period="2m" version="1" run-forced="true" delay="0s"
+		  enabled="true">
+		<task-param>
+			<param-name>task-class</param-name>
+			<param-value>com.megasoft.merchant.mms.tarea.simple.envio.EnvioNodos</param-value>
+		</task-param>
+		<task-param>
+			<param-name>metodoenvio</param-name>
+			<param-value>Rabbit</param-value>
+		</task-param>
+	</task>
+	<task class="b2b.util.scheduler.SchedulerBusyTask" name="EnvioNodosAcquirers"
+		  description="Envia todos los NodosAcquirers" period="2m" version="1" run-forced="true"
+		  delay="0s" enabled="true">
+		<task-param>
+			<param-name>task-class</param-name>
+			<param-value>com.megasoft.merchant.mms.tarea.simple.envio.EnvioNodosAcquirers</param-value>
+		</task-param>
+		<task-param>
+			<param-name>metodoenvio</param-name>
+			<param-value>Rabbit</param-value>
+		</task-param>
+	</task>
+	<task class="b2b.util.scheduler.SchedulerBusyTask" name="EnvioCaptureMode"
+		  description="Envia todos los CaptureMode" period="2m" version="1" run-forced="true" delay="0s"
+		  enabled="true">
+		<task-param>
+			<param-name>task-class</param-name>
+			<param-value>com.megasoft.merchant.mms.tarea.simple.envio.EnvioCaptureMode</param-value>
+		</task-param>
+		<task-param>
+			<param-name>metodoenvio</param-name>
+			<param-value>Rabbit</param-value>
+		</task-param>
+	</task>
+	<task class="b2b.util.scheduler.SchedulerBusyTask" name="EnvioTransPays"
+		  description="Envia todos los TransPays" period="2m" version="1" run-forced="true" delay="0s"
+		  enabled="true">
+		<task-param>
+			<param-name>task-class</param-name>
+			<param-value>com.megasoft.merchant.mms.tarea.simple.envio.EnvioTransPays</param-value>
+		</task-param>
+		<task-param>
+			<param-name>metodoenvio</param-name>
+			<param-value>Rabbit</param-value>
+		</task-param>
+	</task>
+	<task class="b2b.util.scheduler.SchedulerBusyTask" name="EnvioSecurityKeys"
+		  description="Envia todos los SecurityKeys" period="2m" version="1" run-forced="true" delay="0s"
+		  enabled="true">
+		<task-param>
+			<param-name>task-class</param-name>
+			<param-value>com.megasoft.merchant.mms.tarea.simple.envio.EnvioSecurityKeys</param-value>
+		</task-param>
+		<task-param>
+			<param-name>metodoenvio</param-name>
+			<param-value>Rabbit</param-value>
+		</task-param>
+	</task>
+	<task class="b2b.util.scheduler.SchedulerBusyTask" name="EnvioBins"
+		  description="Envia todos los Bins" period="2m" version="1" run-forced="true" delay="0s"
+		  enabled="true">
+		<task-param>
+			<param-name>task-class</param-name>
+			<param-value>com.megasoft.merchant.mms.tarea.simple.envio.EnvioBins</param-value>
+		</task-param>
+		<task-param>
+			<param-name>metodoenvio</param-name>
+			<param-value>Rabbit</param-value>
+		</task-param>
+	</task>
+	<task class="b2b.util.scheduler.SchedulerBusyTask" name="BinTables"
+		  description="Envia todos los BinTables" period="2m" version="1" run-forced="true" delay="0s"
+		  enabled="true">
+		<task-param>
+			<param-name>task-class</param-name>
+			<param-value>com.megasoft.merchant.mms.tarea.simple.envio.EnvioBinTables</param-value>
+		</task-param>
+		<task-param>
+			<param-name>metodoenvio</param-name>
+			<param-value>Rabbit</param-value>
+		</task-param>
+	</task>
+	<task class="b2b.util.scheduler.SchedulerBusyTask" name="BinTablesBins"
+		  description="Envia todos los BinTablesBins" period="2m" version="1" run-forced="true" delay="0s"
+		  enabled="true">
+		<task-param>
+			<param-name>task-class</param-name>
+			<param-value>com.megasoft.merchant.mms.tarea.simple.envio.EnvioBinTablesBins</param-value>
+		</task-param>
+		<task-param>
+			<param-name>metodoenvio</param-name>
+			<param-value>Rabbit</param-value>
+		</task-param>
+	</task>
+	<task class="b2b.util.scheduler.SchedulerBusyTask" name="RetailerPays"
+		  description="Envia todos los RetailerPays" period="2m" version="1" run-forced="true" delay="0s"
+		  enabled="true">
+		<task-param>
+			<param-name>task-class</param-name>
+			<param-value>com.megasoft.merchant.mms.tarea.simple.envio.EnvioRetailerPays</param-value>
+		</task-param>
+		<task-param>
+			<param-name>metodoenvio</param-name>
+			<param-value>Rabbit</param-value>
+		</task-param>
+	</task>
+	<task class="b2b.util.scheduler.SchedulerBusyTask" name="MPaysIssuerSw"
+		  description="Envia todos los MPaysIssuerSw" period="2m" version="1" run-forced="true" delay="0s"
+		  enabled="true">
+		<task-param>
+			<param-name>task-class</param-name>
+			<param-value>com.megasoft.merchant.mms.tarea.simple.envio.EnvioMPaysIssuerSw</param-value>
+		</task-param>
+		<task-param>
+			<param-name>metodoenvio</param-name>
+			<param-value>Rabbit</param-value>
+		</task-param>
+	</task>
+	<task class="b2b.util.scheduler.SchedulerBusyTask" name="UniversalBins"
+		  description="Envia todos los UniversalBins" period="2m" version="1" run-forced="true" delay="0s"
+		  enabled="true">
+		<task-param>
+			<param-name>task-class</param-name>
+			<param-value>com.megasoft.merchant.mms.tarea.simple.envio.EnvioUniversalBins</param-value>
+		</task-param>
+		<task-param>
+			<param-name>metodoenvio</param-name>
+			<param-value>Rabbit</param-value>
+		</task-param>
+	</task>
+	<task class="b2b.util.scheduler.SchedulerBusyTask" name="RPaysIssuerSw"
+		  description="Envia todos los RPaysIssuerSw" period="2m" version="1" run-forced="true" delay="0s"
+		  enabled="true">
+		<task-param>
+			<param-name>task-class</param-name>
+			<param-value>com.megasoft.merchant.mms.tarea.simple.envio.EnvioRPaysIssuerSw</param-value>
+		</task-param>
+		<task-param>
+			<param-name>metodoenvio</param-name>
+			<param-value>Rabbit</param-value>
+		</task-param>
+	</task>
+	<task class="b2b.util.scheduler.SchedulerBusyTask" name="RPaysCards"
+		  description="Envia todos los RPaysCards" period="2m" version="1" run-forced="true" delay="0s"
+		  enabled="true">
+		<task-param>
+			<param-name>task-class</param-name>
+			<param-value>com.megasoft.merchant.mms.tarea.simple.envio.EnvioRPaysCards</param-value>
+		</task-param>
+		<task-param>
+			<param-name>metodoenvio</param-name>
+			<param-value>Rabbit</param-value>
+		</task-param>
+	</task>
+</scheduler>

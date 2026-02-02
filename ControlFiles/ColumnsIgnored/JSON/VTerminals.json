@@ -1,0 +1,11 @@
+{
+  "columns": [
+    "llock",
+    "batchstatus",
+    "LastTransaction",
+    "Seqnumvtid",
+    "LastSettlementDate",
+    "LastSettlementTime",
+    "IPOrigen"
+  ]
+}

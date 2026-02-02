@@ -1,0 +1,18 @@
+{
+  "columns": [
+    "StatusCierre",
+    "STN",
+    "BatchNum",
+    "TCPin",
+    "AActive",
+    "SeqRemesa",
+    "BatchStatus",
+    "BatchStatus2",
+    "InvoiceNum",
+    "PendingLogon",
+    "PendingLogonSerial",
+    "LastSettlement",
+    "CountableDate",
+    "LLock"
+  ]
+}

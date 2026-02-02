@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/" debug="false">
+
+    <!-- Declare the ConsoleAppender -->
+    <appender name="consoleAppender" class="org.apache.log4j.ConsoleAppender">
+        <param name="Threshold" value="OFF"/>
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="%d [%t] %-5p  %c{1}.%M(..) Line[%L] %m %n"/>
+        </layout>
+    </appender>
+
+    <!-- Declare the FileAppender -->
+
+    <!-- Nuevo Appender para borrar logs viejos -->
+    <appender name="fileAppender" class="org.apache.log4j.RollingFileAppender">
+        <param name="Threshold" value="INFO"/>
+        <param name="File" value="LogFiles/Txt/LogGeneral.log"/>
+        <param name="MaxFileSize" value="20000KB"/>
+        <param name="maxBackupIndex" value="50"/>
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="%d [%t] %-5p  %c{1}.%M(..) Line[%L] %m %n"/>
+        </layout>
+    </appender>
+
+    <appender name="HtmlFile"
+              class="org.apache.log4j.RollingFileAppender">
+        <param name="File" value="LogFiles/Html/LogGeneral.html"/>
+        <param name="Threshold" value="INFO"/>
+        <param name="MaxFileSize" value="1MB"/>
+        <param name="MaxBackupIndex" value="10"/>
+        <layout class="org.apache.log4j.HTMLLayout">
+            <param name="LocationInfo" value="true"/>
+            <param name="Title" value="Log de Cliente MMS"/>
+        </layout>
+    </appender>
+
+
+    <!-- L O G G E R S -->
+
+    <root>
+        <!--
+      La utilización del SMTP Logger JCUBE requiere que:
+    	Se defina un Messenger Jcube, Activo e Iniciado previamente, con el nombre "JCube-Messenger"
+    	Se defina, en el Filter del Appender, el LevelMin y LevelMax a enviar por SMTP
+    	Se activen los appenders ajustando sus Niveles entre LevelMin y LevelMax.
+    	Colocar, en los Appenders que utilicen SMTP, la propiedad additivity=true.
+
+     -->
+        <level value="ALL"/>
+        <appender-ref ref="consoleAppender"/>
+        <appender-ref ref="fileAppender"/>
+        <appender-ref ref="HtmlFile"/>
+    </root>
+
+
+</log4j:configuration>

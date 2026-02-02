@@ -1,0 +1,11 @@
+{
+  "columns": [
+    "CVV2",
+    "ExpDate",
+    "Track2",
+    "Track1",
+    "PIN",
+    "b055",
+    "b055_response"
+  ]
+}

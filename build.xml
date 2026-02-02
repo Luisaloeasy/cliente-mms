@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project default="create_distribution" name="Create distribution Scheduler Merchant" basedir=".">
+	<!--this file was created by Eclipse Runnable JAR Export Wizard-->
+	<!--ANT 1.7 is required                                        -->
+
+	<property file="build.properties" />
+	<property name="lib.home" value="${lib.reference}" />
+	<property name="dir.release" value="${release}/MMSCliente-${version}" />
+
+	<path id="build.classpath">
+		<fileset dir="${lib.home}">
+			<include name="**/*.jar" />
+		</fileset>
+	</path>
+
+	<target name="compile">
+		<echo message="-------------- Compilando Clases --------------"/>
+		 <javac srcdir="./source"
+		           destdir="./classes"
+		           debug="on"
+		           optimize="off"
+		           deprecation="off"
+		           target="1.8">
+		      	<classpath refid="build.classpath"/>
+		    </javac>
+	</target>
+
+	<target name="create_distribution" depends="compile">
+		<delete dir="${dir.release}" />
+		<mkdir dir="${dir.release}" />
+		<mkdir dir="${dir.release}/config" />
+		<mkdir dir="${dir.release}/lib" />
+
+		<copy todir="${dir.release}/lib">
+			<fileset dir="${lib.home}">
+				<include name="**/*.*" />
+
+			</fileset>
+		</copy>
+
+		<copy todir="${dir.release}">
+			<fileset dir="${components}" />
+		</copy>
+
+		<copy todir="${dir.release}/config">
+			<fileset dir="${basedir}/config" />
+		</copy>
+
+		<copy todir="${dir.release}/ConfigFiles">
+			<fileset dir="${basedir}/ConfigFiles" />
+		</copy>
+		
+		<copy todir="${dir.release}/ControlFiles">
+					<fileset dir="${basedir}/ControlFiles" />
+		</copy>
+		
+		<copy todir="${dir.release}/LogFiles">
+					<fileset dir="${basedir}/LogFiles" />
+		</copy>
+		
+		<copy todir="${dir.release}/keys">
+					<fileset dir="${basedir}/keys" />
+		</copy>
+
+		<echo>
+		=== PACKAGE ===
+	</echo>
+
+		<!-- convert build.classpath to mf.classpath (the string needed for the manifest task) -->
+		<pathconvert property="mf.classpath" pathsep=" ">
+			<path refid="build.classpath" />
+			<flattenmapper />
+		</pathconvert>
+
+		<!-- now build the manifest file, using mf.classpath -->
+		<tstamp />
+		<!-- needed for TODAY -->
+		<manifest file="MANIFEST.MF">
+			<attribute name="Built-By" value="Mega Soft Computacion C.A. " />
+			<attribute name="Created-By" value="Mega Soft Computacion C.A." />
+			<attribute name="Main-Class" value="com.megasoft.merchant.mms.MainCliente" />
+			<attribute name="Implementation-Version" value="${version}" />
+			<attribute name="Built-Date" value="${TODAY}" />
+			<attribute name="Class-Path" value=". webserver.jar ${mf.classpath}" />
+			<attribute name="Java-SpecVersion" value="${java.specification.version}" />
+			<attribute name="Java-ClassVersion" value="${java.class.version}" />
+			<attribute name="Java-RuntimeVersion" value="${java.runtime.version}" />
+		</manifest>
+
+		<jar destfile="${dir.release}/lib/MMSCliente-${version}.jar" manifest="MANIFEST.MF">
+			<fileset dir="${basedir}/classes" />
+		</jar>
+
+	</target>
+</project>

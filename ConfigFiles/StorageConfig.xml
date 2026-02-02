@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<StorageConfig>
+    <params>
+        <param>
+            <param-name>MinReqStorageMB</param-name>
+            <param-value>500</param-value>
+        </param>
+        <param>
+            <param-name>Host</param-name>
+            <param-value>192.168.1.5</param-value>
+        </param>
+        <param>
+            <param-name>Port</param-name>
+            <param-value>25</param-value>
+        </param>
+        <param>
+            <param-name>De</param-name>
+            <param-value>laloisi@megasoft.com.ve</param-value>
+        </param>
+        <!--Los
+        valores del parametro "Para" deberan estar separados por ";" y encerrados en "()"-->
+        <param>
+            <param-name>Para</param-name>
+            <param-value>(luisaloeasy@gmail.com)</param-value>
+        </param>
+    </params>
+</StorageConfig>

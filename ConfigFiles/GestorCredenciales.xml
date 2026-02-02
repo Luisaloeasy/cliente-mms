@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<GestorCredenciales>
+    <params>
+        <param>
+            <param-name>url</param-name>
+            <param-value>https://gecre1.megatest.com.ve:443/api/v1</param-value>
+        </param>
+        <param>
+            <param-name>jwt</param-name>
+            <param-value></param-value>
+        </param>
+        <param>
+            <param-name>gecre.cred.rmq</param-name>
+            <param-value></param-value>
+        </param>
+        <param>
+            <param-name>gecre.keystore.rmq</param-name>
+            <param-value></param-value>
+        </param>
+    </params>
+</GestorCredenciales>
