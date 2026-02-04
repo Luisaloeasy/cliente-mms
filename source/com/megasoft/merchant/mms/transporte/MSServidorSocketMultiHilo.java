@@ -47,18 +47,32 @@ public abstract class MSServidorSocketMultiHilo extends Thread{
 		}
 	}
 
-	protected void finalize() {
+//	protected void finalize() {
+//        if (servidor != null) {
+//            try {
+//            	servidor.close();
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
+//            servidor = null;
+//        }
+//    }
+
+    public void shutdown() {
+        isActive = false;
         if (servidor != null) {
             try {
-            	servidor.close();
+                servidor.close();
             } catch (IOException e) {
                 e.printStackTrace();
+            } finally {
+                servidor = null;
             }
-            servidor = null;
         }
     }
-	
-	/*
+
+
+    /*
 	 * ejemplo new ServidorSocketSimple(servidor.accept(), puerto).start();
 	 * */
 	protected abstract void activarServidor(Socket socket, int puerto);

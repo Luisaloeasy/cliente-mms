@@ -13,17 +13,22 @@
 		</fileset>
 	</path>
 
-	<target name="compile">
-		<echo message="-------------- Compilando Clases --------------"/>
-		 <javac srcdir="./source"
-		           destdir="./classes"
-		           debug="on"
-		           optimize="off"
-		           deprecation="off"
-		           target="1.8">
-		      	<classpath refid="build.classpath"/>
-		    </javac>
-	</target>
+    <target name="compile">
+        <echo message="-------------- Compilando Clases --------------"/>
+        <javac srcdir="./source"
+               destdir="./classes"
+               debug="on"
+               optimize="off"
+               deprecation="off"
+               includeantruntime="false"
+               fork="true"
+               encoding="ISO-8859-1"
+               source="21"
+               target="21">
+            <classpath refid="build.classpath"/>
+            <compilerarg line="-proc:full"/>
+        </javac>
+    </target>
 
 	<target name="create_distribution" depends="compile">
 		<delete dir="${dir.release}" />

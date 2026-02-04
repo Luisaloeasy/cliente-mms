@@ -6,19 +6,19 @@
 		<params>
 			<param>
 				<param-name>nombreCliente</param-name>
-				<param-value>Servidor</param-value>
+				<param-value>Desa_Merchant_Postgres</param-value>
 			</param>
 			<param>
 				<param-name>emailCliente</param-name>
-				<param-value>prueba@megasoft.com.ve</param-value>
+				<param-value>laloisi@megasoft.com.ve</param-value>
 			</param>
 			<param>
 				<param-name>idCliente</param-name>
-				<param-value>123</param-value>
+				<param-value>10712</param-value>
 			</param>
 			<param>
 				<param-name>puerto</param-name>
-				<param-value>2569</param-value>
+				<param-value>2570</param-value>
 			</param>
 		</params>
 	</entity>
@@ -39,16 +39,6 @@
 			<param>
 				<param-name>File-Path</param-name>
 				<param-value>ConfigFiles/RabbitMQEnvioConfig.xml</param-value>
-			</param>
-		</params>
-	</entity>
-	<entity>
-		<name>Storage</name>
-		<confsource>XML</confsource>
-		<params>
-			<param>
-				<param-name>File-Path</param-name>
-				<param-value>ConfigFiles/StorageConfig.xml</param-value>
 			</param>
 		</params>
 	</entity>

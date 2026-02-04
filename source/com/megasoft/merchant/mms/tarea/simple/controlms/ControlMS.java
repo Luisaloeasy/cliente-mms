@@ -39,8 +39,9 @@ public abstract class ControlMS extends Simple{
 									cargarConfEntidadDeGeneral("ConfigFiles/GeneralConfig.xml",
 															   "ConfCliente");
 				
-				if (confCliente.get("idCliente") == null || 
-						new Integer(confCliente.get("idCliente").toString()).intValue() == -1){
+				if (confCliente.get("idCliente") == null ||
+                        Integer.parseInt(confCliente.get("idCliente").toString()) == -1
+                ){
 					
 					logger.error("No se puede realizar la operacion ya que no se a registrado la Instancia del Cliente en el Servidor se esperar 5seg para volver a intentar");
 					try {
@@ -49,8 +50,8 @@ public abstract class ControlMS extends Simple{
 						logger.error("Error al detener el Thread por la espera de registro", e);
 					}
 				}
-				idCliente = new Integer(confCliente.get("idCliente").toString()).intValue();
-			}
+                idCliente = Integer.parseInt(confCliente.get("idCliente").toString());
+            }
 		} catch (EntityConfigurationLoadException e){
 			logger.error("No se pudo cargar la Configuracion del Cliente del archivo de Configuracion General", e);
 			return;

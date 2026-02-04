@@ -30,10 +30,10 @@ public class MainCliente {
 
 			LinkedHashMap confCliente = FachadaConf.
 					cargarConfEntidadDeGeneral("ConfigFiles/GeneralConfig.xml","ConfCliente");
-			
-			puertoAp = new Integer(confCliente.get("puerto").toString()).intValue();
 
-		    if (!isInstanceActive(puertoAp)){
+            puertoAp = Integer.parseInt(confCliente.get("puerto").toString());
+
+            if (!isInstanceActive(puertoAp)){
 
 				log.info("Iniciando MainCliente");
 				RabbitConexion rabbit = new RabbitConexion();

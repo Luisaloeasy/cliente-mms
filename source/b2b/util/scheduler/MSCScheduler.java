@@ -1,6 +1,7 @@
 package b2b.util.scheduler;
 
 import java.io.*;
+import java.lang.reflect.InvocationTargetException;
 import java.text.*;
 import java.util.*;
 
@@ -40,7 +41,7 @@ public class MSCScheduler extends Thread {
 	private static Hashtable  infoRunningTask = new Hashtable();
 	
 	/**
-	 * Metodo Invocado desde la Clase Task para refrecar la configuraciòn
+	 * Metodo Invocado desde la Clase Task para refrecar la configuraciï¿½n
 	 * @throws Exception
 	 */
 	public static void doRefresh() throws Exception
@@ -114,7 +115,7 @@ public class MSCScheduler extends Thread {
 	}
 		
 	/**
-	 * Elimina las Tareas que se estan ejecutando y no estan en la actualización
+	 * Elimina las Tareas que se estan ejecutando y no estan en la actualizaciï¿½n
 	 * @throws Exception
 	 */
 	private static  void deleteNotInUpdated() throws Exception
@@ -231,11 +232,10 @@ public class MSCScheduler extends Thread {
 	 */
 	private  static void loadConfig() throws Exception
 	{
-		// Obtiene el nombre de la clase Pliging la cual obtendra la configuración de las tareas
+		// Obtiene el nombre de la clase Pliging la cual obtendra la configuraciï¿½n de las tareas
 		String clase = SchedulerPro.getProperty("class.config.pluging");
 		Log.info( MSCScheduler.class, "Updating Scheduler looking config using Class = " + clase);
-		MSCTaskConfig  configPluging = (MSCTaskConfig) Class.forName(clase).newInstance();
-	
+        MSCTaskConfig configPluging = (MSCTaskConfig) Class.forName(clase).getDeclaredConstructor().newInstance();
 		config = configPluging.getConfig();
 		
 		MSCTasks Tasks = new MSCTasks();
@@ -321,7 +321,7 @@ public class MSCScheduler extends Thread {
 	
 	
 	/**
-	 * Inicializa la Configuración
+	 * Inicializa la Configuraciï¿½n
 	 */
 	public void init() throws Exception {
 
@@ -407,9 +407,10 @@ public class MSCScheduler extends Thread {
 	private static MSCSchedulerTask createSchedulerTask(MSCTaskInfo taskInfo) {
 
 		try {
-        
-			Class taskObject = Class.forName(taskInfo.getTask());
-			MSCSchedulerTask task = (MSCSchedulerTask) taskObject.newInstance();
+
+            Class taskObject = Class.forName(taskInfo.getTask());
+            MSCSchedulerTask task = (MSCSchedulerTask) taskObject.getDeclaredConstructor().newInstance();
+
 			
 			task.setInitParameters(taskInfo.getParameters());
 			return task;
@@ -419,18 +420,13 @@ public class MSCScheduler extends Thread {
 					"ERROR in TimerTask.createSchedulerTask(). "
 					+ "Provided class name does not exists. "
 					+ "Exception is: " + e);
-		} catch (java.lang.IllegalAccessException e) {
-			throw new RuntimeException(
-					"ERROR in TimerTask.createSchedulerTask(). "
-					+ "Cannot instantiate provided class name. "
-					+ "Exception is: " + e);
-		} catch (java.lang.InstantiationException e) {
-			throw new RuntimeException(
-					"ERROR in TimerTask.createSchedulerTask(). "
-					+ "Cannot instantiate provided class name. "
-					+ "Exception is: " + e);
-		}
-	}
+        } catch (IllegalAccessException | InstantiationException | NoSuchMethodException | InvocationTargetException e) {
+            throw new RuntimeException(
+                    "ERROR in TimerTask.createSchedulerTask(). "
+                            + "Cannot instantiate provided class name. "
+                            + "Exception is: " + e, e);
+        }
+    }
 
 	/**
 	 * Launches a <code>Timer</code> object with the provided task information.
@@ -506,7 +502,7 @@ public class MSCScheduler extends Thread {
 				if (userCal.getTime().getTime() < sysCal.getTime().getTime() && (taskInfo.getRunForced()==null ||  !taskInfo.getRunForced().equalsIgnoreCase("true"))) {
                     
 					// Time has passed. Add one day
-					Log.info(MSCScheduler.class, "Se paso la hora, se añadera un dia para la proxima Ejecucion");
+					Log.info(MSCScheduler.class, "Se paso la hora, se aï¿½adera un dia para la proxima Ejecucion");
 					userCal.add(Calendar.DAY_OF_MONTH, 1);
 				}
 				// Set the time object
@@ -526,7 +522,7 @@ public class MSCScheduler extends Thread {
 				*/ 
 
 			// Calcula la cantidad de Milisegundos a agregar
-			int add =  (new Long(MSCSchedulerUtil.parseTime(taskInfo.getPeriod()))).intValue();
+            int add = (int) MSCSchedulerUtil.parseTime(taskInfo.getPeriod());
 			
 			if (taskInfo.getRunForced()!=null &&  taskInfo.getRunForced().equalsIgnoreCase("true"))	{
 

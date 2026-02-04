@@ -7,11 +7,11 @@
 		</param>
 		<param>
 			<param-name>LoteEventos</param-name>
-			<param-value>1</param-value>
+			<param-value>240</param-value>
 		</param>
 		<param>
 			<param-name>TiempoEsperaLoteSeg</param-name>
-			<param-value>600</param-value>
+			<param-value>10</param-value>
 		</param>
 		<param>
 			<param-name>EstablishConnection</param-name>
@@ -19,11 +19,11 @@
 		</param>
 		<param>
 			<param-name>ExchangeName</param-name>
-			<param-value>ve.com.megasoft.megabis.cc_aviadores</param-value>
+			<param-value>ve.com.megasoft.megabis.java21</param-value>
 		</param>
 		<param>
 			<param-name>RoutingKey</param-name>
-			<param-value>client_binding_cc_aviadores</param-value>
+			<param-value>client_binding_java21</param-value>
 		</param>
 		<param>
 			<param-name>VirtualHost</param-name>
@@ -31,7 +31,7 @@
 		</param>
 		<param>
 			<param-name>QueueName</param-name>
-			<param-value>megasoft_megabis_cc_aviadores</param-value>
+			<param-value>megasoft_megabis_java21</param-value>
 		</param>
 		<param>
 			<param-name>Nodo1</param-name>

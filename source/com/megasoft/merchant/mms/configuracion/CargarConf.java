@@ -15,6 +15,7 @@ import java.util.LinkedHashMap;
  * @author Christian De Sousa
  *
  */
+@SuppressWarnings({"unchecked", "rawtypes"})
 public class CargarConf {
 	
 	static Logger logger = Logger.getLogger(CargarConf.class.getName());

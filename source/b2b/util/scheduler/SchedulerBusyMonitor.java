@@ -27,7 +27,7 @@ public class SchedulerBusyMonitor extends Thread {
 		try{
 	
 			if (classTask==null){
-				throw new Exception ("Parámetro 'task-class' no encontrado para la Tarea");
+				throw new Exception ("Parï¿½metro 'task-class' no encontrado para la Tarea");
 			}
 
 	
@@ -40,11 +40,8 @@ public class SchedulerBusyMonitor extends Thread {
 				// Hora de inicio de la tarea
 				timeCallingTask = new Date();
 				//Retorna la Clase
-				Class taskObject = Class.forName(classTask);
-				Log.info( this.getClass(), "Run(): Monitor calling " + classTask + " at " + timeCallingTask.toString() );
-				//Instancia la Tarea
-				SchedulerBusyInterface task = (SchedulerBusyInterface) taskObject.newInstance();
-
+                Class<?> taskObject = Class.forName(classTask);
+                SchedulerBusyInterface task = (SchedulerBusyInterface) taskObject.getDeclaredConstructor().newInstance();
 				//Inicia la Tarea
 				task.run( getInitParameters() );
 			}
