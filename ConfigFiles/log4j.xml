@@ -41,8 +41,6 @@
 
     <root>
         <!--
-      La utilización del SMTP Logger JCUBE requiere que:
-    	Se defina un Messenger Jcube, Activo e Iniciado previamente, con el nombre "JCube-Messenger"
     	Se defina, en el Filter del Appender, el LevelMin y LevelMax a enviar por SMTP
     	Se activen los appenders ajustando sus Niveles entre LevelMin y LevelMax.
     	Colocar, en los Appenders que utilicen SMTP, la propiedad additivity=true.
