@@ -3,19 +3,19 @@
     <params>
         <param>
             <param-name>url</param-name>
-            <param-value>https://gecre1.megatest.com.ve:443/api/v1</param-value>
+            <param-value>https://gecre.megatest.com.ve:443/api/v1</param-value>
         </param>
         <param>
             <param-name>jwt</param-name>
-            <param-value></param-value>
+            <param-value>eyJhbGciOiJIUzUxMiJ9.eyJ0eXBlIjoiU2Vydmlkb3IiLCJpYXQiOjE3NzAwNTQxMjksInN1YiI6ImU4NWNlZGJkLWE2ZWUtNGZiOC1hY2YyLWRlYzMzNmQ4M2Q0ZiJ9.1nh-ecrLVK-4k_HH65O78eAywgAQAZM5ROI2EaP-e5-ZZN0pO_O4_OQeLL9AzyIpZQh91QbXF3g_TDjsnF0scg</param-value>
         </param>
         <param>
             <param-name>gecre.cred.rmq</param-name>
-            <param-value></param-value>
+            <param-value>987caf39-f59c-4237-abbd-389e6a0a032e</param-value>
         </param>
         <param>
             <param-name>gecre.keystore.rmq</param-name>
-            <param-value></param-value>
+            <param-value>48103bbf-5531-4341-979b-e18d855b227d</param-value>
         </param>
     </params>
 </GestorCredenciales>

@@ -71,10 +71,10 @@ public class ControlMSTerminalCierreInsistente extends ControlMS{
 				
 				calendar.add(Calendar.MINUTE, -30);
 				Timestamp fechaInicio = new Timestamp(calendar.getTimeInMillis());
-				
-				int numInsistencias = new Integer(getInitParameter("numinsistencias")).intValue();
 
-				Vector terminalConCierreInsistente = opGetBD.getTerminalConCierreInsistentes(fechaInicio, fechaFin, numInsistencias);
+                int numInsistencias = Integer.parseInt(getInitParameter("numinsistencias"));
+
+                Vector terminalConCierreInsistente = opGetBD.getTerminalConCierreInsistentes(fechaInicio, fechaFin, numInsistencias);
 
 				logger.info("MMS v2 -- Numero de Terminals que poseen Cierres Insistentes "+terminalConCierreInsistente.size());
 

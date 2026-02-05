@@ -3,18 +3,20 @@ Ant-Version: Apache Ant 1.10.14
 Created-By: Mega Soft Computacion C.A.
 Built-By: Mega Soft Computacion C.A. 
 Main-Class: com.megasoft.merchant.mms.MainCliente
-Implementation-Version: 4.4.0
-Built-Date: March 11 2025
-Java-SpecVersion: 17
-Java-ClassVersion: 61.0
-Java-RuntimeVersion: 17.0.8+9-LTS-211
+Implementation-Version: 4.5.0
+Built-Date: February 4 2026
+Java-SpecVersion: 21
+Java-ClassVersion: 65.0
+Java-RuntimeVersion: 21.0.10+8-LTS-217
 Class-Path: . webserver.jar EXML.jar HikariCP-3.4.5.jar amqp-client-5.
- 18.0.jar cliente-rest-gs-1.0.0.jar commons-codec-1.15.jar commons-io-
+ 28.0.jar cliente-rest-gs-1.0.0.jar commons-codec-1.15.jar commons-io-
  1.2.jar commons-logging-1.2.jar commons-net-3.2.jar gson-2.2.1.jar ht
  tpclient-4.5.10.jar httpcore-4.4.12.jar jackson-annotations-2.13.2.ja
  r jackson-core-2.13.2.jar jackson-databind-2.13.2.jar json-20220320.j
  ar log4j-1.2-api-2.17.2.jar log4j-api-2.17.2.jar log4j-core-2.17.2.ja
- r mailapi.jar mssql-jdbc-12.8.1.jre8.jar postgresql-42.7.5.jar slf4j-
- api-2.0.0.jar slf4j-simple-2.0.0.jar smtp.jar wrapper.jar wrapperlinu
- x.jar
+ r mssql-jdbc-13.2.1.jre11.jar netty-buffer-4.1.107.Final.jar netty-co
+ dec-4.1.107.Final.jar netty-common-4.1.107.Final.jar netty-handler-4.
+ 1.107.Final.jar netty-resolver-4.1.107.Final.jar netty-transport-4.1.
+ 107.Final.jar postgresql-42.7.5.jar slf4j-api-2.0.0.jar slf4j-simple-
+ 2.0.0.jar wrapper.jar wrapperlinux.jar
 

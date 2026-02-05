@@ -8,19 +8,12 @@ import com.megasoft.merchant.mms.configuracion.exception.EntityConfigurationSave
 import com.megasoft.merchant.mms.configuracion.exception.FileNotFoundMSConfException;
 import com.megasoft.merchant.mms.tarea.exception.ConfigurationErrorTareaException;
 import com.megasoft.merchant.mms.tarea.exception.InvalidDataTareaException;
-import com.megasoft.merchant.mms.transporte.exception.BadDataMSEmailException;
-import com.megasoft.merchant.mms.transporte.exception.EmailLibraryMSEmailException;
-import com.megasoft.merchant.mms.transporte.exception.SendFailedMSEmailException;
 import org.apache.log4j.Logger;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import ve.com.megasoft.clientegc.logica.ClienteGCImplREST;
 import ve.com.megasoft.clientegc.modelo.CredencialesBaseDeDatos;
 
-import javax.mail.*;
-import javax.mail.internet.AddressException;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeMessage;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -32,14 +25,13 @@ import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
-import java.util.regex.Pattern;
 import java.util.zip.CRC32;
 import java.util.zip.Checksum;
 
 /**
  * @author Ronald Perestrelo
  */
-
+@SuppressWarnings({"unchecked", "rawtypes"})
 public class TareaUtil {
 
     private static Logger logger = Logger.getLogger(TareaUtil.class.getName());
@@ -66,10 +58,10 @@ public class TareaUtil {
     private final static Map TIME_UNIT_MAP = new HashMap();
 
     static {
-        TIME_UNIT_MAP.put(new Character('s'), new Long(SECOND));
-        TIME_UNIT_MAP.put(new Character('m'), new Long(MINUTE));
-        TIME_UNIT_MAP.put(new Character('h'), new Long(HOUR));
-        TIME_UNIT_MAP.put(new Character('d'), new Long(DAY));
+        TIME_UNIT_MAP.put('s', SECOND);
+        TIME_UNIT_MAP.put('m', MINUTE);
+        TIME_UNIT_MAP.put('h', HOUR);
+        TIME_UNIT_MAP.put('d', DAY);
     }
 
     /**
@@ -106,7 +98,7 @@ public class TareaUtil {
             if (Character.isDigit(ch)) {
                 number.append(ch);
             } else {
-                Character unitType = new Character(ch);
+                Character unitType = Character.valueOf(ch);
                 if (TIME_UNIT_MAP.containsKey(unitType)) {
                     longTime += Long.parseLong(number.toString())
                             * ((Long) TIME_UNIT_MAP.get(unitType)).longValue();
@@ -122,7 +114,7 @@ public class TareaUtil {
 
         // Se pasa a Segundos
         longTime = longTime / 1000;
-        return new Long(longTime).intValue();
+        return Long.valueOf(longTime).intValue();
     }
 
     /**
@@ -271,23 +263,6 @@ public class TareaUtil {
         }
 
         return hora;
-    }
-
-    public Vector obtenerListaSeparadaPorPuntoComa(String listaEmails) {
-        Pattern splitter = Pattern.compile("\\;");
-        String[] words = splitter.split(listaEmails);
-        words[0] = words[0].substring(1, words[0].length());
-        words[words.length - 1] = words[words.length - 1].substring(0, words[words.length - 1].length() - 1);
-
-        Vector emails = new Vector();
-        for (int i = 0; i < words.length; i++) {
-            String email = words[i];
-            if (logger.isDebugEnabled()) {
-                logger.debug("Email Obtenido del Conjunto: " + email);
-            }
-            emails.add(email);
-        }
-        return emails;
     }
 
     /**
@@ -462,78 +437,6 @@ public class TareaUtil {
 
         } catch (Exception e) {
             logger.error("MMS v2 -- Ocurrio un error Renombrando o eliminando el archivo: " + entidad,e);
-        }
-    }
-
-    public synchronized void enviarStorageMail(String subject, String text) throws SendFailedMSEmailException,
-            BadDataMSEmailException, EmailLibraryMSEmailException, EntityConfigurationLoadException {
-
-        try {
-
-            if (logger.isDebugEnabled()) {
-                logger.debug("MMS v2 -- Se Inicio el proceso para enviar un correo ");
-            }
-
-            LinkedHashMap confCliente = FachadaConf.cargarConfEntidadDeGeneral("ConfigFiles/GeneralConfig.xml",
-                    "ConfCliente");
-
-            String idCliente = confCliente.get("idCliente").toString();
-
-            String nombreCliente = confCliente.get("nombreCliente").toString();
-
-            LinkedHashMap storageConfig = FachadaConf.cargarConfEntidadDeGeneral("ConfigFiles/GeneralConfig.xml",
-                    "Storage");
-
-            String host = storageConfig.get("Host").toString();
-
-            String port = storageConfig.get("Port").toString();
-
-            String recipient = storageConfig.get("Para").toString();
-
-            Vector destinatarios = obtenerListaSeparadaPorPuntoComa(recipient);
-
-            String sender = storageConfig.get("De").toString();
-
-            String allsub = subject + " Cliente MMS " + nombreCliente + " " + idCliente;
-
-            if (logger.isDebugEnabled()) {
-                logger.debug("MMS v2 -- Se enviara el correo a los  " + "destinatarios:" + recipient
-                        + " De:" + sender + " Asunto:" + allsub);
-            }
-
-            Properties props = new Properties();
-            props.put("mail.smtp.host", host);
-            props.put("mail.smtp.port", port);
-            Session session = Session.getInstance(props);
-            Message msg = new MimeMessage(session);
-            msg.setFrom(new InternetAddress(sender));
-            msg.setSubject(allsub);
-            msg.setSentDate(new Date());
-            msg.setText(text);
-
-            InternetAddress[] address = new InternetAddress[destinatarios.size()];
-            for (int i = 0; i < destinatarios.size(); i++) {
-                address[i] = new InternetAddress((String) destinatarios.get(i));
-            }
-            msg.setRecipients(Message.RecipientType.TO, address);
-
-            Transport.send(msg);
-
-            logger.info("MMS v2 -- Se envio el correo exitosamente a: " + destinatarios
-                    + " De: " + sender + " Asunto:" + allsub);
-
-        } catch (AddressException e) {
-            throw new BadDataMSEmailException("La direccion de envio es invalida", e);
-        } catch (EntityConfigurationLoadException e) {
-            throw new EntityConfigurationLoadException("Se cargaron mal los parametros de la configuracion", e);
-        } catch (MessagingException e) {
-            if (e instanceof SendFailedException)
-                throw new SendFailedMSEmailException("El envio del mail no se pudo realizar", e);
-            else {
-                throw new EmailLibraryMSEmailException("No se puede cambiar el atributo", e);
-
-            }
-
         }
     }
 

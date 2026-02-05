@@ -4,14 +4,6 @@
 		  description='Realiza refresh de la configuracion del Scheduler'
 		  delay='10s' period='10s' version='1' enabled='true'>
 	</task>
-	<task class="b2b.util.scheduler.SchedulerBusyTask" name="DiskSpaceMonitor"
-		  description="DiskSpaceMonitor" period="2m" version="1" run-forced="true" delay="0s"
-		  enabled="true">
-		<task-param>
-			<param-name>task-class</param-name>
-			<param-value>com.megasoft.merchant.mms.tarea.simple.storageMonitor.DiskSpaceMonitor</param-value>
-		</task-param>
-	</task>
 	<task class='b2b.util.scheduler.SchedulerBusyTask'
 		  name='ControlMSTerminalCierreInsistente'
 		  description='Indica los cierre insistente de terminal y MODIFICA su Status Cierre a 0'

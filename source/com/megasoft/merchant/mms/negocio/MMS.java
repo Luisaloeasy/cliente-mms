@@ -29,9 +29,9 @@ public abstract class MMS  implements Serializable{
 		long initialMilis = initialTime.getTime();
 		long endMilis = endTime.getTime();
 		long minutes = ( endMilis - initialMilis ) / 60000;
-		Long longTemp = new Long(minutes);
-		return new Integer(longTemp.toString()).intValue();
-	}
+        Long longTemp = Long.valueOf(minutes);
+        return Integer.parseInt(longTemp.toString());
+    }
 
 	
 }

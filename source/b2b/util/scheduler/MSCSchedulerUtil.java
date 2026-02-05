@@ -24,10 +24,10 @@ public final class MSCSchedulerUtil {
     /** Map between time unit type and milliseconds */
     public final static Map TIME_UNIT_MAP = new HashMap();
     static {
-        TIME_UNIT_MAP.put(new Character('s'), new Long(SECOND));
-        TIME_UNIT_MAP.put(new Character('m'), new Long(MINUTE));
-        TIME_UNIT_MAP.put(new Character('h'), new Long(HOUR));
-        TIME_UNIT_MAP.put(new Character('d'), new Long(DAY));
+        TIME_UNIT_MAP.put('s', SECOND);
+        TIME_UNIT_MAP.put('m', MINUTE);
+        TIME_UNIT_MAP.put('h', HOUR);
+        TIME_UNIT_MAP.put('d', DAY);
     }
     
     /**
@@ -70,7 +70,7 @@ public final class MSCSchedulerUtil {
             if (Character.isDigit(ch)) {
                 number.append(ch);
             } else {
-                Character unitType = new Character(ch);
+                Character unitType = Character.valueOf(ch);
                 if (TIME_UNIT_MAP.containsKey(unitType)) {
                     longTime += Long.parseLong(number.toString())
                              * ((Long) TIME_UNIT_MAP.get(unitType)).longValue(); 
@@ -95,9 +95,9 @@ public final class MSCSchedulerUtil {
                 //number.append(ch);
             } 
             else {
-                
-            	Character unitType = new Character(ch);
-                
+
+                Character unitType = Character.valueOf(ch);
+
                 if (TIME_UNIT_MAP.containsKey(unitType)){
                 	
                 	return (Long)TIME_UNIT_MAP.get(unitType); 
@@ -107,6 +107,6 @@ public final class MSCSchedulerUtil {
                 }
             }
         }
-        return new Long(0);
+        return Long.valueOf(0);
     }
 }
